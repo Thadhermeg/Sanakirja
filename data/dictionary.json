@@ -1,0 +1,14 @@
+{
+  "cat": {
+    "pos": "NOUN",
+    "definition": "A small domesticated animal."
+  },
+  "run": {
+    "pos": "VERB",
+    "definition": "To move swiftly on foot."
+  },
+  "be": {
+    "pos": "VERB",
+    "definition": "To exist."
+  }
+}

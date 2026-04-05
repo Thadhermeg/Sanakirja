@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Dictionary Entry</title>
+</head>
+<body>
+
+<div id="entry"></div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const lemma = params.get("lemma");
+
+fetch("data/dictionary.json")
+  .then(res => res.json())
+  .then(dict => {
+    const entry = dict[lemma];
+
+    if (!entry) {
+      document.getElementById("entry").innerHTML = "<p>Not found</p>";
+      return;
+    }
+
+    document.getElementById("entry").innerHTML = `
+      <h1>${lemma}</h1>
+      <p><strong>POS:</strong> ${entry.pos}</p>
+      <p>${entry.definition}</p>
+    `;
+  });
+</script>
+
+</body>
+</html>

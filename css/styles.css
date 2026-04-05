@@ -1,0 +1,28 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+#container {
+  display: flex;
+}
+
+#text {
+  width: 70%;
+  padding: 20px;
+}
+
+#sidebar {
+  width: 30%;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+  background: #f9f9f9;
+}
+
+.token {
+  cursor: pointer;
+  padding: 2px;
+}
+
+.token:hover {
+  background: yellow;
+}

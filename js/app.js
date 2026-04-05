@@ -48,3 +48,16 @@ function openSidebar(token) {
     </a>
   `;
 }
+
+const texts = [
+  { title: "Iƶoran keelen grammatikka (1936)", file: "data/GT.json" }
+];
+
+const menu = document.getElementById("textMenu");
+
+texts.forEach(t => {
+  const li = document.createElement("li");
+  li.textContent = t.title;
+  li.onclick = () => loadText(t);
+  menu.appendChild(li);
+});

@@ -94,3 +94,35 @@ function openSidebar(token) {
 
   loadInflection(token);
 }
+
+function loadInflection(token) {
+  fetch("data/dictionary.json")
+    .then(res => res.json())
+    .then(dict => {
+      const entry = dict[token.lemma];
+      if (!entry || !entry.inflection) return;
+
+      const forms = entry.inflection.forms;
+
+      let table = "<table><tr>";
+
+      for (let key in forms) {
+        table += `<th>${key}</th>`;
+      }
+
+      table += "</tr><tr>";
+
+      for (let key in forms) {
+        const form = forms[key];
+        const highlight = form === token.form ? "highlight" : "";
+        table += `<td class="${highlight}">${form}</td>`;
+      }
+
+      table += "</tr></table>";
+
+      document.getElementById("inflection").innerHTML = `
+        <h3>Inflection</h3>
+        ${table}
+      `;
+    });
+}

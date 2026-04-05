@@ -98,6 +98,7 @@ function renderStructuredText(structure) {
         span.textContent = token.form;
 
         span.onclick = () => {
+          console.log("CLICKED:", token);
           openSidebar(token);
         };
 

@@ -1,56 +1,122 @@
-let currentTokens = [];
+// ===============================
+// GLOBAL STATE
+// ===============================
 
-function loadText(textMeta) {
-  fetch(textMeta.file)
-    .then(res => res.json())
-    .then(data => {
-      document.getElementById("textTitle").textContent = data.title;
-      renderStructuredText(data.structure);
-    });
-}
+let currentText = null;
 
-function renderStructuredText(structure) {
-  const container = document.getElementById("text");
-  container.innerHTML = "";
-
-  structure.forEach(block => {
-    const p = document.createElement("p");
-
-    block.tokens.forEach((token, i) => {
-      if (token.punct) {
-        p.innerHTML += token.form;
-        return;
-      }
-
-      const span = document.createElement("span");
-      span.className = "token";
-      span.textContent = token.form;
-      span.onclick = () => openSidebar(token);
-
-      p.appendChild(span);
-      p.innerHTML += " ";
-    });
-
-    container.appendChild(p);
-  });
-}
+// ===============================
+// TEXT LIST (LEFT SIDEBAR)
+// ===============================
 
 const texts = [
   { title: "Text 1", file: "data/text1.json" }
 ];
 
+// DOM elements
 const menu = document.getElementById("textMenu");
+const textContainer = document.getElementById("text");
+const textTitle = document.getElementById("textTitle");
+const sidebar = document.getElementById("sidebar");
 
-texts.forEach(t => {
-  const li = document.createElement("li");
-  li.textContent = t.title;
-  li.onclick = () => loadText(t);
-  menu.appendChild(li);
-});
+// ===============================
+// INITIALIZE MENU
+// ===============================
+
+function initMenu() {
+  texts.forEach(t => {
+    const li = document.createElement("li");
+    li.textContent = t.title;
+
+    li.onclick = () => {
+      loadText(t);
+    };
+
+    menu.appendChild(li);
+  });
+}
+
+// ===============================
+// LOAD TEXT
+// ===============================
+
+function loadText(textMeta) {
+  console.log("Loading:", textMeta.file);
+
+  fetch(textMeta.file)
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("Failed to load " + textMeta.file);
+      }
+      return res.json();
+    })
+    .then(data => {
+      console.log("Loaded data:", data);
+
+      currentText = data;
+
+      if (!data.structure) {
+        console.error("Missing 'structure' in JSON");
+        textContainer.innerHTML = "<p>Error: Invalid text format</p>";
+        return;
+      }
+
+      textTitle.textContent = data.title || "Untitled";
+
+      renderStructuredText(data.structure);
+
+      // Reset sidebar
+      sidebar.innerHTML = "<p>Select a word</p>";
+    })
+    .catch(err => {
+      console.error(err);
+      textContainer.innerHTML = "<p>Could not load text.</p>";
+    });
+}
+
+// ===============================
+// RENDER TEXT (WITH STRUCTURE)
+// ===============================
+
+function renderStructuredText(structure) {
+  textContainer.innerHTML = "";
+
+  structure.forEach(block => {
+    if (block.type === "paragraph") {
+      const p = document.createElement("p");
+
+      block.tokens.forEach(token => {
+
+        // Handle punctuation
+        if (token.punct) {
+          p.innerHTML += token.form;
+          return;
+        }
+
+        // Create clickable token
+        const span = document.createElement("span");
+        span.className = "token";
+        span.textContent = token.form;
+
+        span.onclick = () => {
+          openSidebar(token);
+        };
+
+        p.appendChild(span);
+
+        // Add space after word
+        p.appendChild(document.createTextNode(" "));
+      });
+
+      textContainer.appendChild(p);
+    }
+  });
+}
+
+// ===============================
+// SIDEBAR (MORPHOLOGY VIEW)
+// ===============================
 
 function openSidebar(token) {
-  const sidebar = document.getElementById("sidebar");
-
   const morphLabels = {
     pos: "Part of Speech",
     tense: "Tense",
@@ -72,6 +138,7 @@ function openSidebar(token) {
 
   sidebar.innerHTML = `
     <h2>${token.form}</h2>
+
     <p><strong>Lemma:</strong> ${token.lemma}</p>
 
     <div>
@@ -95,23 +162,32 @@ function openSidebar(token) {
   loadInflection(token);
 }
 
+// ===============================
+// INFLECTION TABLE
+// ===============================
+
 function loadInflection(token) {
   fetch("data/dictionary.json")
     .then(res => res.json())
     .then(dict => {
       const entry = dict[token.lemma];
-      if (!entry || !entry.inflection) return;
+
+      if (!entry || !entry.inflection) {
+        return;
+      }
 
       const forms = entry.inflection.forms;
 
       let table = "<table><tr>";
 
+      // Header row
       for (let key in forms) {
         table += `<th>${key}</th>`;
       }
 
       table += "</tr><tr>";
 
+      // Values row
       for (let key in forms) {
         const form = forms[key];
         const highlight = form === token.form ? "highlight" : "";
@@ -124,7 +200,17 @@ function loadInflection(token) {
         <h3>Inflection</h3>
         ${table}
       `;
-    });
+    })
+    .catch(err => console.error("Dictionary load error:", err));
 }
 
-loadText(texts[0]);
+// ===============================
+// INIT APP
+// ===============================
+
+initMenu();
+
+// Load first text automatically
+if (texts.length > 0) {
+  loadText(texts[0]);
+}

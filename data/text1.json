@@ -9,25 +9,38 @@
           "lemma": "ižora",
           "gloss": "ижора",
           "pos": "NS",
-          "morph": { "номинатив", "единственное число" }
+          "morph": 
+            { 
+              "case": "номинатив",
+              "number": 1
+            },
         },
         {
           "form": "laatiit",
           "lemma": "laatia",
           "gloss": "создать",
           "pos": "V",
-          "morph": { "индикатив", "3 лицо", "множественное число" },
+          "morph": 
+            { 
+              "aspect": "индикатив", 
+              "person": 3, 
+              "number": 1
+            },
         },
         {
           "form": "kansan",
           "lemma": "kansa",
           "gloss": "народ",
           "pos": "NS",
-          "morph": { "генитив", "единственное число" }
+          "morph": 
+            { 
+              "case": "генитив",
+              "number": 0
+            },
         },
         { 
           "form": ","
-          "punct": true,
+          "punct": true
         }
       ]
     }

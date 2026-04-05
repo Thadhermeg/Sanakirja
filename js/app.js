@@ -9,7 +9,7 @@ let currentText = null;
 // ===============================
 
 const texts = [
-  { title: "Text 1", file: "data/text1.json" }
+  { title: "Iƶoran keelen grammatikka (1936)", file: "data/GT.json" }
 ];
 
 // DOM elements

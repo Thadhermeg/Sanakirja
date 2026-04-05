@@ -1,14 +1,13 @@
 {
-  "cat": {
+  "ižora": {
     "pos": "NOUN",
-    "definition": "A small domesticated animal."
+    "definition": "1. ижорский язык<br />2. ижора; ижорский народ<br />3. (мн. ч.) ижоры",
+    "inflection": {
+      "type": "noun",
+      "forms": {
+        "nominative": "ižora",
+        "genitive": "ižoran",
+      }
+    }
   },
-  "run": {
-    "pos": "VERB",
-    "definition": "To move swiftly on foot."
-  },
-  "be": {
-    "pos": "VERB",
-    "definition": "To exist."
-  }
 }

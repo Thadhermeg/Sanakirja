@@ -5,36 +5,41 @@
       "type": "paragraph",
       "tokens": [
         {
-          "form": "The",
-          "lemma": "the",
-          "pos": "DET"
+          "form": "Iƶorat",
+          "lemma": "ižora",
+          "gloss": "ижора",
+          "pos": "NS",
+          "morph": 
+            { 
+              "case": "номинатив",
+              "number": 1
+            }
         },
         {
-          "form": "cat",
-          "lemma": "cat",
-          "pos": "NOUN",
-          "morph": {
-            "number": "singular"
-          }
+          "form": "laatiit",
+          "lemma": "laatia",
+          "gloss": "создать",
+          "pos": "V",
+          "morph": 
+            { 
+              "aspect": "индикатив", 
+              "person": 3, 
+              "number": 1
+            }
         },
         {
-          "form": "is",
-          "lemma": "be",
-          "pos": "VERB",
-          "morph": {
-            "tense": "present"
-          }
+          "form": "kansan",
+          "lemma": "kansa",
+          "gloss": "народ",
+          "pos": "NS",
+          "morph": 
+            { 
+              "case": "генитив",
+              "number": 0
+            }
         },
-        {
-          "form": "running",
-          "lemma": "run",
-          "pos": "VERB",
-          "morph": {
-            "aspect": "progressive"
-          }
-        },
-        {
-          "form": ".",
+        { 
+          "form": ",",
           "punct": true
         }
       ]

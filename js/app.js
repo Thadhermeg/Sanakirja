@@ -121,7 +121,6 @@ function openSidebar(token) {
 
   const morphLabels = {
     pos: "Part of Speech",
-    gloss: "Gloss",
     tense: "Tense",
     number: "Number",
     aspect: "Aspect",

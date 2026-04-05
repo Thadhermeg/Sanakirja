@@ -40,23 +40,36 @@ function initMenu() {
 // ===============================
 
 function loadText(textMeta) {
+  console.log("Loading:", textMeta.file);
+
   fetch(textMeta.file)
     .then(res => {
-      console.log("Status:", res.status);
-
       if (!res.ok) {
-        throw new Error("HTTP error: " + res.status);
+        throw new Error("Failed to load " + textMeta.file);
       }
-
       return res.json();
     })
     .then(data => {
-      console.log("SUCCESS:", data);
+      console.log("Loaded data:", data);
+
+      currentText = data;
+
+      if (!data.structure) {
+        console.error("Missing 'structure' in JSON");
+        textContainer.innerHTML = "<p>Error: Invalid text format</p>";
+        return;
+      }
+
+      textTitle.textContent = data.title || "Untitled";
+
       renderStructuredText(data.structure);
+
+      // Reset sidebar
+      sidebar.innerHTML = "<p>Select a word</p>";
     })
     .catch(err => {
-      console.error("ERROR:", err);
-      alert("Check console (F12)");
+      console.error(err);
+      textContainer.innerHTML = "<p>Could not load text.</p>";
     });
 }
 

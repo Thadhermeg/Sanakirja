@@ -7,18 +7,26 @@
 </head>
 <body>
 
-<h1>Corpus Browser</h1>
+<div id="layout">
+  <!-- LEFT SIDEBAR -->
+  <div id="textList">
+    <h2>Texts</h2>
+    <ul id="textMenu"></ul>
+  </div>
 
-<select id="textSelector">
-  <option value="data/text1.json">Text 1</option>
-</select>
+  <!-- CENTER -->
+  <div id="textView">
+    <h1 id="textTitle"></h1>
+    <div id="text"></div>
+  </div>
 
-<div id="container">
-  <div id="text"></div>
-  <div id="sidebar"></div>
+  <!-- RIGHT SIDEBAR -->
+  <div id="sidebar">
+    <p>Select a word</p>
+  </div>
+
 </div>
 
 <script src="js/app.js"></script>
-
 </body>
 </html>

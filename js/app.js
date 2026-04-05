@@ -1,5 +1,3 @@
-
-
 let currentTokens = [];
 
 function loadText(textMeta) {
@@ -37,29 +35,8 @@ function renderStructuredText(structure) {
   });
 }
 
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("token")) {
-    const id = e.target.dataset.id;
-    const token = currentTokens.find(t => t.id == id);
-    openSidebar(token);
-  }
-});
-
-function openSidebar(token) {
-  sidebar.innerHTML = `
-    <h2>${token.form}</h2>
-    <p><strong>Lemma:</strong> ${token.lemma}</p>
-    <p><strong>POS:</strong> ${token.pos}</p>
-    <p><strong>Morphology:</strong></p>
-    <pre>${JSON.stringify(token.morph, null, 2)}</pre>
-    <a href="lemma.html?lemma=${token.lemma}">
-      View dictionary entry
-    </a>
-  `;
-}
-
 const texts = [
-  { title: "Iƶoran keelen grammatikka (1936)", file: "data/GT.json" }
+  { title: "Text 1", file: "data/text1.json" }
 ];
 
 const menu = document.getElementById("textMenu");

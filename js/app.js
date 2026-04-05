@@ -118,6 +118,7 @@ function renderStructuredText(structure) {
 
 function openSidebar(token) {
   const morphLabels = {
+    gloss: "Gloss",
     pos: "Part of Speech",
     tense: "Tense",
     number: "Number",

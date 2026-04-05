@@ -1,31 +1,40 @@
+
+
 let currentTokens = [];
 
-const textContainer = document.getElementById("text");
-const sidebar = document.getElementById("sidebar");
-const selector = document.getElementById("textSelector");
-
-// Load default text
-loadText(selector.value);
-
-selector.addEventListener("change", () => {
-  loadText(selector.value);
-});
-
-function loadText(path) {
-  fetch(path)
+function loadText(textMeta) {
+  fetch(textMeta.file)
     .then(res => res.json())
     .then(data => {
-      currentTokens = data.tokens;
-      renderText();
+      document.getElementById("textTitle").textContent = data.title;
+      renderStructuredText(data.structure);
     });
 }
 
-function renderText() {
-  textContainer.innerHTML = currentTokens.map(token =>
-    `<span class="token" data-id="${token.id}">
-      ${token.form}
-    </span>`
-  ).join(" ");
+function renderStructuredText(structure) {
+  const container = document.getElementById("text");
+  container.innerHTML = "";
+
+  structure.forEach(block => {
+    const p = document.createElement("p");
+
+    block.tokens.forEach((token, i) => {
+      if (token.punct) {
+        p.innerHTML += token.form;
+        return;
+      }
+
+      const span = document.createElement("span");
+      span.className = "token";
+      span.textContent = token.form;
+      span.onclick = () => openSidebar(token);
+
+      p.appendChild(span);
+      p.innerHTML += " ";
+    });
+
+    container.appendChild(p);
+  });
 }
 
 document.addEventListener("click", (e) => {

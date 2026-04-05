@@ -1,28 +1,88 @@
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
 }
 
-#container {
+#layout {
   display: flex;
+  height: 100vh;
 }
 
-#text {
-  width: 70%;
+/* LEFT SIDEBAR */
+#textList {
+  width: 20%;
+  background: #2c3e50;
+  color: white;
+  padding: 15px;
+}
+
+#textList ul {
+  list-style: none;
+  padding: 0;
+}
+
+#textList li {
+  padding: 8px;
+  cursor: pointer;
+}
+
+#textList li:hover {
+  background: #34495e;
+}
+
+/* CENTER */
+#textView {
+  width: 50%;
   padding: 20px;
+  overflow-y: auto;
 }
 
+/* RIGHT SIDEBAR */
 #sidebar {
   width: 30%;
   padding: 20px;
   border-left: 1px solid #ccc;
-  background: #f9f9f9;
+  background: #f7f7f7;
+  overflow-y: auto;
 }
 
+/* TOKENS */
 .token {
   cursor: pointer;
-  padding: 2px;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
 
 .token:hover {
+  background: #ffeaa7;
+}
+
+/* MORPH TAGS */
+.tag {
+  display: inline-block;
+  padding: 3px 6px;
+  margin: 2px;
+  border-radius: 4px;
+  font-size: 12px;
+  color: white;
+}
+
+.pos { background: #6c5ce7; }
+.tense { background: #00b894; }
+.number { background: #e17055; }
+.aspect { background: #0984e3; }
+
+/* TABLE */
+table {
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+td, th {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.highlight {
   background: yellow;
 }

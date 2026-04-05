@@ -47,3 +47,50 @@ texts.forEach(t => {
   li.onclick = () => loadText(t);
   menu.appendChild(li);
 });
+
+function openSidebar(token) {
+  const sidebar = document.getElementById("sidebar");
+
+  const morphLabels = {
+    pos: "Part of Speech",
+    tense: "Tense",
+    number: "Number",
+    aspect: "Aspect"
+  };
+
+  let morphHTML = "";
+
+  if (token.morph) {
+    for (let key in token.morph) {
+      morphHTML += `
+        <span class="tag ${key}">
+          ${morphLabels[key] || key}: ${token.morph[key]}
+        </span>
+      `;
+    }
+  }
+
+  sidebar.innerHTML = `
+    <h2>${token.form}</h2>
+    <p><strong>Lemma:</strong> ${token.lemma}</p>
+
+    <div>
+      <span class="tag pos">
+        Part of Speech: ${token.pos}
+      </span>
+    </div>
+
+    <h3>Morphology</h3>
+    ${morphHTML}
+
+    <div id="inflection"></div>
+
+    <p>
+      <a href="lemma.html?lemma=${token.lemma}">
+        View dictionary entry
+      </a>
+    </p>
+  `;
+
+  loadInflection(token);
+}

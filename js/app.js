@@ -117,49 +117,65 @@ function renderStructuredText(structure) {
 // ===============================
 
 function openSidebar(token) {
+  console.log("Opening sidebar for:", token);
+
   const morphLabels = {
-    gloss: "Gloss",
     pos: "Part of Speech",
+    gloss: "Gloss",
     tense: "Tense",
     number: "Number",
-    aspect: "Aspect"
+    aspect: "Aspect",
+    case: "Case"
   };
 
+  // Safe defaults
+  const form = token.form || "(unknown)";
+  const lemma = token.lemma || "(no lemma)";
+  const pos = token.pos || "(unknown)";
+  const morph = token.morph || {};
+
+  // Build morphology tags
   let morphHTML = "";
 
-  if (token.morph) {
-    for (let key in token.morph) {
+  if (Object.keys(morph).length === 0) {
+    morphHTML = "<p><em>No morphological information available.</em></p>";
+  } else {
+    for (let key in morph) {
       morphHTML += `
         <span class="tag ${key}">
-          ${morphLabels[key] || key}: ${token.morph[key]}
+          ${morphLabels[key] || key}: ${morph[key]}
         </span>
       `;
     }
   }
 
+  // Always render base info FIRST
   sidebar.innerHTML = `
-    <h2>${token.form}</h2>
+    <h2>${form}</h2>
 
-    <p><strong>Lemma:</strong> ${token.lemma}</p>
+    <p><strong>Lemma:</strong> ${lemma}</p>
 
     <div>
       <span class="tag pos">
-        Part of Speech: ${token.pos}
+        Part of Speech: ${pos}
       </span>
     </div>
 
     <h3>Morphology</h3>
     ${morphHTML}
 
-    <div id="inflection"></div>
+    <div id="inflection">
+      <p><em>Loading inflection…</em></p>
+    </div>
 
     <p>
-      <a href="lemma.html?lemma=${token.lemma}">
+      <a href="lemma.html?lemma=${encodeURIComponent(lemma)}">
         View dictionary entry
       </a>
     </p>
   `;
 
+  // Load inflection AFTER rendering (non-blocking)
   loadInflection(token);
 }
 
@@ -168,12 +184,31 @@ function openSidebar(token) {
 // ===============================
 
 function loadInflection(token) {
+  const container = document.getElementById("inflection");
+
   fetch("data/dictionary.json")
-    .then(res => res.json())
+    .then(res => {
+      if (!res.ok) {
+        throw new Error("Dictionary file not found");
+      }
+      return res.json();
+    })
     .then(dict => {
       const entry = dict[token.lemma];
 
-      if (!entry || !entry.inflection) {
+      // No dictionary entry at all
+      if (!entry) {
+        container.innerHTML = `
+          <p><em>No dictionary entry found for "${token.lemma}".</em></p>
+        `;
+        return;
+      }
+
+      // No inflection data
+      if (!entry.inflection || !entry.inflection.forms) {
+        container.innerHTML = `
+          <p><em>No inflection data available.</em></p>
+        `;
         return;
       }
 
@@ -181,28 +216,40 @@ function loadInflection(token) {
 
       let table = "<table><tr>";
 
-      // Header row
+      // Header
       for (let key in forms) {
         table += `<th>${key}</th>`;
       }
 
       table += "</tr><tr>";
 
-      // Values row
+      // Values
       for (let key in forms) {
         const form = forms[key];
-        const highlight = form === token.form ? "highlight" : "";
+
+        // Normalize comparison (important for diacritics!)
+        const isMatch =
+          form.normalize("NFC") === token.form.normalize("NFC");
+
+        const highlight = isMatch ? "highlight" : "";
+
         table += `<td class="${highlight}">${form}</td>`;
       }
 
       table += "</tr></table>";
 
-      document.getElementById("inflection").innerHTML = `
+      container.innerHTML = `
         <h3>Inflection</h3>
         ${table}
       `;
     })
-    .catch(err => console.error("Dictionary load error:", err));
+    .catch(err => {
+      console.error("Inflection error:", err);
+
+      container.innerHTML = `
+        <p><em>Could not load inflection data.</em></p>
+      `;
+    });
 }
 
 // ===============================

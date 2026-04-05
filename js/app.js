@@ -126,3 +126,5 @@ function loadInflection(token) {
       `;
     });
 }
+
+loadText(texts[0]);

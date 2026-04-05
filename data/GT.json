@@ -1,28 +1,31 @@
 {
-  "tokens": [
+  "title": "Iƶoran keelen grammatikka (1936)",
+  "structure": [
     {
-      "id": 1,
-      "form": "Iƶorat",
-      "lemma": "ižora",
-      "gloss": "ижора",
-      "pos": "NS",
-      "morph": { "номинатив", "единственное число" },
-    },
-    {
-      "id": 2,
-      "form": "laatiit",
-      "lemma": "laatia",
-      "gloss": "создать",
-      "pos": "V",
-      "morph": { "индикатив", "3 лицо", "множественное число" },
-    },
-    {
-      "id": 3,
-      "form": "kansan",
-      "lemma": "kansa",
-      "gloss": "народ",
-      "pos": "NS",
-      "morph": { "генитив", "единственное число" }
-    },
+      "type": "paragraph",
+      "tokens": [
+        {
+          "form": "Iƶorat",
+          "lemma": "ižora",
+          "gloss": "ижора",
+          "pos": "NS",
+          "morph": { "номинатив", "единственное число" }
+        },
+        {
+          "form": "laatiit",
+          "lemma": "laatia",
+          "gloss": "создать",
+          "pos": "V",
+          "morph": { "индикатив", "3 лицо", "множественное число" },
+        },
+        {
+          "form": "kansan",
+          "lemma": "kansa",
+          "gloss": "народ",
+          "pos": "NS",
+          "morph": { "генитив", "единственное число" }
+        },
+      ]
+    }
   ]
 }

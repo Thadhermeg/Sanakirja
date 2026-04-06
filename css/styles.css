@@ -72,6 +72,7 @@ body {
 .number { background: #e17055; }
 .aspect { background: #0984e3; }
 .case { background: #ff0000; }
+.person { background: #ffc000; }
 
 /* TABLE */
 table {

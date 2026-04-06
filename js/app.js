@@ -124,7 +124,8 @@ function openSidebar(token) {
     tense: "время",
     number: "число",
     aspect: "вид",
-    case: "падеж"
+    case: "падеж",
+    person: "лицо"
   };
 
   // Safe defaults

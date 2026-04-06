@@ -1,12 +1,39 @@
 {
   "ižora": {
-    "pos": "NOUN",
+    "pos": "существительное",
     "definition": "1. ижорский язык<br />2. ижора; ижорский народ<br />3. (мн. ч.) ижоры",
     "inflection": {
       "type": "noun",
       "forms": {
-        "nominative": "ižora",
-        "genitive": "ižoran"
+        "ед. ч.":
+          {
+            "nominative": "ižora",
+            "genitive": "ižoran"
+          },
+        "мн. ч.":
+          {
+            "nominative": "ižorat",
+            "genitive": "ižoroin"
+          }
+        }
+      }
+    }
+  "laatia": {
+    "pos": "глагол",
+    "definition": "1. создать, создавать<br />2. починить, чинить",
+    "inflection": {
+      "type": "verb",
+      "forms": {
+        "наст. вр.":
+          {
+            "1sg": "laahin",
+            "2sg": "laahit"
+          },
+        "прош. вр.":
+          {
+            "1sg": "laahin",
+            "2sg": "laahit"
+          }
         }
       }
     }

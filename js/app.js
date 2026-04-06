@@ -120,11 +120,11 @@ function openSidebar(token) {
   console.log("Opening sidebar for:", token);
 
   const morphLabels = {
-    pos: "Part of Speech",
-    tense: "Tense",
-    number: "Number",
-    aspect: "Aspect",
-    case: "Case"
+    pos: "часть речи",
+    tense: "время",
+    number: "число",
+    aspect: "вид",
+    case: "падеж"
   };
 
   // Safe defaults
@@ -152,15 +152,16 @@ function openSidebar(token) {
   sidebar.innerHTML = `
     <h2>${form}</h2>
 
-    <p><strong>Lemma:</strong> ${lemma}</p>
+    <p><strong>Лемма:</strong> ${lemma}</p>
+    <p><strong>Перевод:</strong> ${gloss}</p>
 
     <div>
       <span class="tag pos">
-        Part of Speech: ${pos}
+        Часть речи: ${pos}
       </span>
     </div>
 
-    <h3>Morphology</h3>
+    <h3>Морфология:</h3>
     ${morphHTML}
 
     <div id="inflection">

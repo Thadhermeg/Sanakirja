@@ -71,6 +71,7 @@ body {
 .tense { background: #00b894; }
 .number { background: #e17055; }
 .aspect { background: #0984e3; }
+.case { background: #ff0000; }
 
 /* TABLE */
 table {

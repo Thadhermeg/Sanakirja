@@ -130,6 +130,7 @@ function openSidebar(token) {
   // Safe defaults
   const form = token.form || "(unknown)";
   const lemma = token.lemma || "(no lemma)";
+  const gloss = token.gloss || "(no gloss)";
   const pos = token.pos || "(unknown)";
   const morph = token.morph || {};
 

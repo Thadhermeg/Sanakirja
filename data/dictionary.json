@@ -5,16 +5,8 @@
     "inflection": {
       "type": "noun",
       "forms": {
-        "ед. ч.":
-          {
-            "nominative": "ižora",
-            "genitive": "ižoran"
-          },
-        "мн. ч.":
-          {
-            "nominative": "ižorat",
-            "genitive": "ižoroin"
-          }
+          "nominative": "ižora",
+          "genitive": "ižoran"
         }
       }
     }
@@ -24,16 +16,8 @@
     "inflection": {
       "type": "verb",
       "forms": {
-        "наст. вр.":
-          {
-            "1sg": "laahin",
-            "2sg": "laahit"
-          },
-        "прош. вр.":
-          {
-            "1sg": "laahin",
-            "2sg": "laahit"
-          }
+          "1sg": "laahin",
+          "2sg": "laahit"
         }
       }
     }

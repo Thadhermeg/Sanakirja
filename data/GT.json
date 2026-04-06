@@ -8,11 +8,11 @@
           "form": "Iƶorat",
           "lemma": "ižora",
           "gloss": "ижора",
-          "pos": "NS",
+          "pos": "N",
           "morph": 
             { 
               "case": "номинатив",
-              "number": 1
+              "number": "мн. ч."
             }
         },
         {
@@ -24,23 +24,34 @@
             { 
               "aspect": "индикатив", 
               "person": 3, 
-              "number": 1
+              "number": "мн. ч."
             }
         },
         {
           "form": "kansan",
           "lemma": "kansa",
           "gloss": "народ",
-          "pos": "NS",
+          "pos": "N",
           "morph": 
             { 
               "case": "генитив",
-              "number": 0
+              "number": "ед. ч."
             }
         },
         { 
           "form": ",",
           "punct": true
+        },
+        {
+          "form": "kumpa",
+          "lemma": "kumpa",
+          "gloss": "который",
+          "pos": "NS",
+          "morph": 
+            { 
+              "case": "номинатив",
+              "number": "ед. ч."
+            }
         }
       ]
     }

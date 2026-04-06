@@ -81,34 +81,34 @@ function renderStructuredText(structure) {
   textContainer.innerHTML = "";
 
   structure.forEach(block => {
-    if (block.type === "paragraph") {
-      const p = document.createElement("p");
+    const p = document.createElement("p");
 
-      block.tokens.forEach(token => {
+    block.tokens.forEach(token => {
 
-        // Handle punctuation
-        if (token.punct) {
-          p.innerHTML += token.form;
-          return;
-        }
+      // Punctuation
+      if (token.punct) {
+        const textNode = document.createTextNode(token.form);
+        p.appendChild(textNode);
+        return;
+      }
 
-        // Create clickable token
-        const span = document.createElement("span");
-        span.className = "token";
-        span.textContent = token.form;
+      // Word token
+      const span = document.createElement("span");
+      span.className = "token";
+      span.textContent = token.form;
 
-        span.onclick = () => {
-          openSidebar(token);
-        };
+      span.onclick = () => {
+        console.log("CLICKED:", token);
+        openSidebar(token);
+      };
 
-        p.appendChild(span);
+      p.appendChild(span);
 
-        // Add space after word
-        p.appendChild(document.createTextNode(" "));
-      });
+      // Add space AFTER word
+      p.appendChild(document.createTextNode(" "));
+    });
 
-      textContainer.appendChild(p);
-    }
+    textContainer.appendChild(p);
   });
 }
 
